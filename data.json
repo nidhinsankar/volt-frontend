@@ -1,0 +1,238 @@
+{
+  "new_data": {
+    "all_hotels": [
+      {
+        "cheap": {
+          "name": "Hotel Sangeetha",
+          "price": 800,
+          "rating": 3.5,
+          "image": "https://www.hotel-sangeetha.com/images/hotel-image.jpg",
+          "location": "T. Nagar, Chennai"
+        },
+        "moderate": {
+          "name": "Ibis Chennai City Centre",
+          "price": 2500,
+          "rating": 4.2,
+          "image": "https://www.ibis.com/images/ibis-chennai-city-centre.jpg",
+          "location": "Mount Road, Chennai"
+        },
+        "high": {
+          "name": "The Raintree Hotel Anna Salai",
+          "price": 6000,
+          "rating": 4.8,
+          "image": "https://www.raintreehotels.in/images/raintree-anna-salai.jpg",
+          "location": "Anna Salai, Chennai"
+        }
+      },
+      {
+        "cheap": {
+          "name": "Hotel Kuber",
+          "price": 700,
+          "rating": 3.8,
+          "image": "https://www.hotelkuber.com/images/hotel-image.jpg",
+          "location": "T. Nagar, Chennai"
+        },
+        "moderate": {
+          "name": "Fortune Select Grand View",
+          "price": 2800,
+          "rating": 4.5,
+          "image": "https://www.fortuneselecthotels.com/images/fortune-select-grand-view.jpg",
+          "location": "Mount Road, Chennai"
+        },
+        "high": {
+          "name": "The Accord Metropolitan",
+          "price": 7000,
+          "rating": 4.9,
+          "image": "https://www.theaccordmetropolitan.com/images/the-accord-metropolitan.jpg",
+          "location": "Anna Salai, Chennai"
+        }
+      }
+    ],
+    "all_places": [
+      {
+        "cheap": {
+          "name": "Marina Beach",
+          "price": 0,
+          "image": "https://www.marina-beach.com/images/marina-beach.jpg",
+          "description": "India's longest urban beach",
+          "location": "East Coast Road, Chennai"
+        },
+        "moderate": {
+          "name": "Government Museum",
+          "price": 50,
+          "image": "https://www.chennaimuseum.org/images/government-museum.jpg",
+          "description": "One of the oldest museums in the country",
+          "location": "Chennai, Gandhi Nagar"
+        },
+        "high": {
+          "name": "VGP Universal Kingdom",
+          "price": 1000,
+          "image": "https://www.vgpusa.com/images/vgp-universal-kingdom.jpg",
+          "description": "A theme park with various rides and attractions",
+          "location": "Ecr Road, Chennai"
+        }
+      },
+      {
+        "cheap": {
+          "name": "Arignar Anna Zoological Park",
+          "price": 20,
+          "image": "https://www.arignaranna-zoo.com/images/arignar-anna-zoo.jpg",
+          "description": "A zoo with a large collection of animals",
+          "location": "Vandalur, Chennai"
+        },
+        "moderate": {
+          "name": "Cholamandalam Art Gallery",
+          "price": 50,
+          "image": "https://www.cholamandalam.com/images/cholamandalam-art-gallery.jpg",
+          "description": "A gallery showcasing traditional and contemporary art",
+          "location": "Chennai, T. Nagar"
+        },
+        "high": {
+          "name": "ISKCON Temple",
+          "price": 0,
+          "image": "https://www.iskconchennai.org/images/iskcon-temple.jpg",
+          "description": "A beautiful temple dedicated to Lord Krishna",
+          "location": "Chennai, T. Nagar"
+        }
+      }
+    ],
+    "transportation": {
+      "flight": {
+        "from": "Delhi",
+        "to": "Chennai",
+        "price": 5000,
+        "duration": "2 hours"
+      },
+      "train": {
+        "from": "Delhi",
+        "to": "Chennai",
+        "price": 2000,
+        "duration": "30 hours"
+      },
+      "bus": {
+        "from": "Delhi",
+        "to": "Chennai",
+        "price": 1000,
+        "duration": "48 hours"
+      }
+    }
+  },
+  "old_data": {
+    "Day 1": {
+      "Hotel Options": {
+        "Cheap": {
+          "Hotel Name": "Chennai Woodlands Hotel",
+          "Price": 1500,
+          "Rating": 3.5
+        },
+        "Moderate": {
+          "Hotel Name": "The Residency",
+          "Price": 3000,
+          "Rating": 4.2
+        },
+        "High": {
+          "Hotel Name": "The Accord Metropolitan",
+          "Price": 6000,
+          "Rating": 4.8
+        }
+      },
+      "Places to Visit": [
+        {
+          "Place": "Marina Beach",
+          "Ticket Price": 0,
+          "Description": "One of the longest urban beaches in the country"
+        },
+        {
+          "Place": "Kapaleeswarar Temple",
+          "Ticket Price": 50,
+          "Description": "A historic temple dedicated to Lord Shiva"
+        },
+        {
+          "Place": "Fort St. George",
+          "Ticket Price": 50,
+          "Description": "A historic British fort and the oldest English settlement in India"
+        }
+      ],
+      "Transportation": {
+        "Airport to Hotel": { "Taxi": 800, "Auto-Rickshaw": 300, "Metro": 40 },
+        "Local Transportation": { "Metro": 10, "Auto-Rickshaw": 20, "Bus": 5 }
+      }
+    },
+    "Day 2": {
+      "Hotel Options": {
+        "Cheap": {
+          "Hotel Name": "Hotel Saravana Bhavan",
+          "Price": 1200,
+          "Rating": 3.8
+        },
+        "Moderate": {
+          "Hotel Name": "The Park Chennai",
+          "Price": 3500,
+          "Rating": 4.5
+        },
+        "High": { "Hotel Name": "The Leela Palace", "Price": 8000, "Rating": 5 }
+      },
+      "Places to Visit": [
+        {
+          "Place": "Chennai Harbor",
+          "Ticket Price": 0,
+          "Description": "A beautiful harbor with scenic views"
+        },
+        {
+          "Place": "National Art Gallery",
+          "Ticket Price": 20,
+          "Description": "A museum showcasing Indian art and artifacts"
+        },
+        {
+          "Place": "Guindy National Park",
+          "Ticket Price": 20,
+          "Description": "A national park with a wide variety of flora and fauna"
+        }
+      ],
+      "Transportation": {
+        "Airport to Hotel": { "Taxi": 900, "Auto-Rickshaw": 250, "Metro": 30 },
+        "Local Transportation": { "Metro": 10, "Auto-Rickshaw": 20, "Bus": 5 }
+      }
+    },
+    "Day 3": {
+      "Hotel Options": {
+        "Cheap": {
+          "Hotel Name": "Hotel Presidency",
+          "Price": 1000,
+          "Rating": 3.2
+        },
+        "Moderate": {
+          "Hotel Name": "The Residency Towers",
+          "Price": 2800,
+          "Rating": 4.1
+        },
+        "High": {
+          "Hotel Name": "The ITC Grand Chola",
+          "Price": 7000,
+          "Rating": 4.9
+        }
+      },
+      "Places to Visit": [
+        {
+          "Place": "Vandalur Zoo",
+          "Ticket Price": 50,
+          "Description": "One of the largest zoos in India"
+        },
+        {
+          "Place": "Elliots Beach",
+          "Ticket Price": 0,
+          "Description": "A popular beach with scenic views"
+        },
+        {
+          "Place": "Ashtalakshmi Temple",
+          "Ticket Price": 20,
+          "Description": "A beautiful temple dedicated to Goddess Lakshmi"
+        }
+      ],
+      "Transportation": {
+        "Airport to Hotel": { "Taxi": 850, "Auto-Rickshaw": 250, "Metro": 35 },
+        "Local Transportation": { "Metro": 10, "Auto-Rickshaw": 20, "Bus": 5 }
+      }
+    }
+  }
+}

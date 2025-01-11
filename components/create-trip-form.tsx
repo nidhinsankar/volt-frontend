@@ -14,8 +14,8 @@ import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Card, CardContent } from "./ui/card";
-import { useLazyQuery, useQuery } from "@apollo/client";
-import { GET_TRIP_PLAN_QUERY } from "@/lib/graphql";
+import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
+import { ADD_CONTENT, GET_TRIP_PLAN_QUERY } from "@/lib/graphql";
 import { parseClean } from "@/lib/utils";
 import TripResult from "./trip-result";
 import data from "@/data.json";
@@ -77,14 +77,33 @@ const CreateTripForm = () => {
 
   // Use lazy query instead of useQuery to manually trigger it
   const [getTripPlan, { loading }] = useLazyQuery(GET_TRIP_PLAN_QUERY, {
-    onCompleted: (data) => {
+    onCompleted: async (data) => {
       try {
         const parsedResult = JSON.parse(parseClean(data.generateTripPlan));
         setTripResult(parsedResult);
         setTravelData(parsedResult);
-        setIsSubmitting(false);
-        setError(null);
-        router.push(`/trip-plan/${formData.location}`);
+        console.log("data=>", data.generateTripPlan);
+
+        // Add the data to database before navigation
+        try {
+          setIsSubmitting(true);
+          const { results, errors } = await handleAddAllContent();
+
+          if (errors.length > 0) {
+            console.error("Some items failed to add:", errors);
+            // Optionally set an error state or show a notification
+          }
+
+          console.log("results", results);
+
+          // Navigate only after database operations are complete
+          setIsSubmitting(false);
+          setError(null);
+          router.push(`/trip-plan/${formData.location}`);
+        } catch (err) {
+          setError("Error adding content to database");
+          setIsSubmitting(false);
+        }
       } catch (err) {
         setError("Error processing trip plan data");
         setIsSubmitting(false);
@@ -103,7 +122,7 @@ const CreateTripForm = () => {
     const validateForm = () => {
       const errors = [];
       if (!formData.location.trim()) errors.push("Location is required");
-      if (!formData.days || formData.days < 1)
+      if (!formData.days || parseInt(formData.days) < 1)
         errors.push("Valid number of days is required");
       if (!formData.selectedBudget)
         errors.push("Please select a budget option");
@@ -144,18 +163,63 @@ const CreateTripForm = () => {
 
   console.log("parse", tripResult);
 
-  // if (isSubmitting) {
-  //   return <div className="py-28 ">Loading..........</div>;
-  // }
+  const [
+    addContent,
+    { data, loading: addContentLoading, error: addContentError },
+  ] = useMutation(ADD_CONTENT);
 
-  // if (error) {
-  //   return <div className="py-28">error.......</div>;
-  // }
+  const handleAddContent = async (contentItem: any) => {
+    try {
+      const response = await addContent({
+        variables: {
+          content: {
+            id: `${contentItem?.name}-${contentItem?.price}`,
+            name: contentItem.name,
+            price: contentItem.price, // Ensure price is a number
+            address: contentItem.address,
+            image: contentItem.image,
+            type: contentItem.type,
+            tags: contentItem.tags,
+            cost_option: contentItem.cost_option,
+            description: contentItem.description,
+          },
+        },
+      });
+      console.log("Content added successfully:", response.data.addContent);
+      return response.data.addContent;
+    } catch (err) {
+      console.error("Error adding content:", err);
+      throw err;
+    }
+  };
+  const handleAddAllContent = async () => {
+    const results = [];
+    const errors = [];
+    console.log("handleAddAllContent");
 
-  // if (tripResult) {
-  //   return <TripResult data={tripResult} />;
-  // }
+    if (!tripResult?.result) {
+      throw new Error("No trip result data available");
+    }
+    const all_data = {
+      all_hotels: tripResult?.result?.all_hotels || [],
+      all_places: tripResult?.result?.all_places || [],
+      all_transportation: tripResult?.result?.all_transportation || [],
+    };
 
+    for (const [category, items] of Object.entries(all_data)) {
+      for (const item of items) {
+        try {
+          const result = await handleAddContent(item);
+          results.push(result);
+        } catch (err) {
+          errors.push({ item: item, error: err });
+        }
+      }
+    }
+
+    // Return results and errors for handling by parent component
+    return { results, errors };
+  };
   return (
     <div>
       <main className="container mx-auto px-4 pt-24 pb-16 max-w-3xl">

@@ -22,13 +22,10 @@ import data from "@/data.json";
 import { budgetOptions, companionOptions } from "@/lib/constants";
 import useTravelStore from "@/lib/store";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
 
 const CreateTripForm = () => {
-  const [selectedBudget, setSelectedBudget] = useState<string>("");
-  const [selectedCompanions, setSelectedCompanions] = useState<string>("");
-  const [location, setLocation] = useState("chennai,india");
-  const [days, setDays] = useState("3");
-  const [people, setPeople] = useState("2");
+  const { toast } = useToast();
   const router = useRouter();
   const { setTravelData } = useTravelStore();
   const [error, setError] = useState<null | string>("");
@@ -83,6 +80,10 @@ const CreateTripForm = () => {
         setTripResult(parsedResult);
         setTravelData(parsedResult);
         console.log("data=>", data.generateTripPlan);
+        toast({
+          title: "Trip Plan",
+          description: "Generating the Trip Plan Contents",
+        });
 
         // Add the data to database before navigation
         try {
@@ -99,10 +100,18 @@ const CreateTripForm = () => {
           // Navigate only after database operations are complete
           setIsSubmitting(false);
           setError(null);
+          toast({
+            title: "Trip Plan Generated",
+            description: "Generated the Trip Plan Contents Successfully",
+          });
           router.push(`/trip-plan/${formData.location}`);
         } catch (err) {
           setError("Error adding content to database");
           setIsSubmitting(false);
+          toast({
+            title: "Trip Plan Failed",
+            description: "Generating the Contents Faile.Try Again",
+          });
         }
       } catch (err) {
         setError("Error processing trip plan data");
@@ -118,6 +127,7 @@ const CreateTripForm = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setError(null);
+
     // Validate form data before submission
     const validateForm = () => {
       const errors = [];
@@ -146,9 +156,11 @@ const CreateTripForm = () => {
       location: formData.location,
       days: formData.days,
       people: formData.people,
-      // budget: formData.selectedBudget,
-      // companionType: formData.selectedCompanions,
     };
+
+    toast({
+      description: "Generating the Trip Plan Contents",
+    });
 
     try {
       // Execute the query
@@ -340,7 +352,7 @@ const CreateTripForm = () => {
               <Button
                 type="submit"
                 size="lg"
-                className="text-lg px-8"
+                className="rounded-full px-8 py-6 text-lg font-medium bg-gradient-to-r from-violet-600 to-violet-500 hover:from-violet-500 hover:to-violet-600 shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 transition-all duration-300 group"
                 disabled={
                   !formData.location ||
                   !formData.days ||

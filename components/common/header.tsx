@@ -1,35 +1,49 @@
+"use client";
+
 import Link from "next/link";
-import { Button, buttonVariants } from "../ui/button";
+import { motion } from "framer-motion";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const Header = () => {
   return (
-    <header className="fixed w-full top-0 z-50 bg-white/80 backdrop-blur-md border-b">
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      className="fixed w-full top-0 z-50 bg-white/60 backdrop-blur-xl border-b border-gray-200/30"
+    >
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 rounded-full bg-violet-600" />
-          <span className="text-xl font-semibold">
-            <span className="text-violet-500">GOT</span>rip AI
+        <Link href="/" className="flex items-center space-x-3 group">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-violet-600 to-violet-500 shadow-lg shadow-violet-500/25 transition-all duration-300 group-hover:shadow-violet-500/40 group-hover:scale-105" />
+          <span className="text-xl font-bold tracking-tight">
+            <span className="bg-gradient-to-r from-violet-600 to-violet-500 bg-clip-text text-transparent">
+              GOT
+            </span>
+            rip AI
           </span>
-        </div>
-        <div className="flex items-center space-x-4">
-          <Button variant="secondary" className="font-medium">
-            Sign In
-          </Button>
+        </Link>
+        <div className="flex items-center space-x-6">
           <Link
-            className={buttonVariants({ variant: "ghost" })}
-            href={"/create-trip"}
+            className={cn(
+              buttonVariants({ variant: "outline" }),
+              "border-violet-200 hover:border-violet-300 hover:bg-violet-50 transition-colors duration-300"
+            )}
+            href="/create-trip"
           >
-            create trip
+            Create Trip
           </Link>
           <Link
-            className={buttonVariants({ variant: "link" })}
-            href={"/dashboard"}
+            className={cn(
+              buttonVariants({ variant: "default" }),
+              "bg-gradient-to-r from-violet-600 to-violet-500 hover:from-violet-500 hover:to-violet-600 shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 transition-all duration-300"
+            )}
+            href="/dashboard"
           >
             My Trips
           </Link>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 };
 

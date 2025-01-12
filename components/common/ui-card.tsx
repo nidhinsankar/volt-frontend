@@ -1,7 +1,14 @@
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Badge } from "../ui/badge";
-import { Clock, IndianRupee, MapPin, Star, Tag } from "lucide-react";
+import {
+  Clock,
+  DollarSign,
+  IndianRupee,
+  MapPin,
+  Star,
+  Tag,
+} from "lucide-react";
 import { Item } from "@/types";
 import { motion } from "framer-motion";
 import TripImage from "@/app/assets/trip-image.jpg";
@@ -104,7 +111,7 @@ export function ItemCard({ item }: ItemCardProps) {
           </div>
 
           <div className="flex items-center gap-1 font-medium">
-            <IndianRupee className="h-4 w-4" />
+            <DollarSign className="h-4 w-4" />
             <span>
               {item.price === 0 ? "Free" : item.price.toLocaleString("en-IN")}
             </span>
@@ -125,56 +132,6 @@ export function ItemCard({ item }: ItemCardProps) {
         </CardContent>
       </Card>
     </motion.div>
-    // <Card className="overflow-hidden hover:shadow-lg transition-all">
-    //   <div className="relative h-48">
-    //     <img
-    //       src={item.image}
-    //       alt={item.name}
-    //       className="object-cover"
-    //       onError={(e) => (e.currentTarget.src = TripImage.src)}
-    //     />
-    //     <Badge
-    //       className="absolute top-2 right-2 capitalize"
-    //       variant={
-    //         item.cost_option === "cheap"
-    //           ? "default"
-    //           : item.cost_option === "moderate"
-    //           ? "secondary"
-    //           : "destructive"
-    //       }
-    //     >
-    //       {item.cost_option}
-    //     </Badge>
-    //   </div>
-    //   <CardHeader>
-    //     <CardTitle>{item.name}</CardTitle>
-    //   </CardHeader>
-    //   <CardContent className="space-y-2">
-    //     <p className="text-sm text-muted-foreground line-clamp-2">
-    //       {item.description}
-    //     </p>
-    //     <div className="flex items-center gap-2 text-sm text-muted-foreground">
-    //       <MapPin className="h-4 w-4" />
-    //       <span className="line-clamp-1">{item.address}</span>
-    //     </div>
-    //     <div className="flex items-center gap-1 font-semibold">
-    //       <IndianRupee className="h-4 w-4" />
-    //       {item.price === 0 ? "Free" : item.price.toLocaleString("en-IN")}
-    //     </div>
-    //     <div className="flex flex-wrap gap-1">
-    //       {item.tags.map((tag: any, index: any) => (
-    //         <Badge
-    //           key={index}
-    //           variant="outline"
-    //           className="flex items-center gap-1"
-    //         >
-    //           <Tag className="h-3 w-3" />
-    //           {tag}
-    //         </Badge>
-    //       ))}
-    //     </div>
-    //   </CardContent>
-    // </Card>
   );
 }
 

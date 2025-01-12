@@ -3,6 +3,7 @@ export interface Item {
   price: number;
   address: string;
   image: string;
+  type: string;
   tags: string[];
   cost_option: "cheap" | "moderate" | "high";
   description: string;

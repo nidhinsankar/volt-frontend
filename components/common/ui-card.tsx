@@ -4,7 +4,9 @@ import { Badge } from "../ui/badge";
 import { Clock, IndianRupee, MapPin, Star, Tag } from "lucide-react";
 import { Item } from "@/types";
 import { motion } from "framer-motion";
-import TripImage from "@/app/trip-image.jpg";
+import TripImage from "@/app/assets/trip-image.jpg";
+import hotelImage from "@/app/assets/hotel.jpg";
+import transportImage from "@/app/assets/transport.jpeg";
 
 interface HotelCardProps {
   hotel: any;
@@ -55,6 +57,17 @@ interface ItemCardProps {
   item: Item;
 }
 
+const getImageByType = (type: string) => {
+  switch (type) {
+    case "transportation":
+      return transportImage.src;
+    case "place":
+      return TripImage.src;
+    default:
+      return hotelImage.src;
+  }
+};
+
 export function ItemCard({ item }: ItemCardProps) {
   return (
     <motion.div whileHover={{ y: -2 }} transition={{ duration: 0.2 }}>
@@ -64,7 +77,7 @@ export function ItemCard({ item }: ItemCardProps) {
             src={item.image}
             alt={item.name}
             className="absolute inset-0 w-full h-full object-cover"
-            onError={(e) => (e.currentTarget.src = TripImage.src)}
+            onError={(e) => (e.currentTarget.src = getImageByType(item?.type))}
           />
           <Badge
             className="absolute top-2 right-2 capitalize"

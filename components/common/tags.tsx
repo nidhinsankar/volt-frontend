@@ -15,15 +15,17 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { AlertCircle, RefreshCcw, X, MapPin, DollarSign } from "lucide-react";
 import { ItemCard } from "./ui-card";
 import { motion } from "framer-motion";
+import { Input } from "../ui/input";
 
 const TripsDisplay = () => {
   const [activeFilter, setActiveFilter] = useState({ type: null, value: null });
-
+  const [searchQuery, setSearchQuery] = useState("");
   // Query for all tags
   const {
     data: tagsData,
     loading: tagsLoading,
     error: tagsError,
+    refetch: tagsRefetch,
   } = useQuery(GET_ALL_TAGS);
 
   // Query for trips based on active filter
@@ -58,6 +60,12 @@ const TripsDisplay = () => {
   const clearFilter = () => {
     setActiveFilter({ type: null, value: null });
   };
+  const filterTrips = (trips: any) => {
+    if (!trips) return [];
+    return trips.filter((trip: any) =>
+      trip.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  };
 
   const renderTags = () => {
     if (tagsLoading) {
@@ -75,6 +83,14 @@ const TripsDisplay = () => {
         <Alert variant="destructive" className="mb-6">
           <AlertCircle className="h-4 w-4" />
           <AlertTitle>Error</AlertTitle>
+          <Button
+            variant="outline"
+            size="sm"
+            className="mt-2"
+            onClick={tagsRefetch}
+          >
+            Retry
+          </Button>
           <AlertDescription>Failed to load tags</AlertDescription>
         </Alert>
       );
@@ -90,7 +106,14 @@ const TripsDisplay = () => {
                 ? "default"
                 : "secondary"
             }
-            className="cursor-pointer hover:bg-secondary-hover"
+            className={`
+              px-3 py-1 cursor-pointer text-sm font-normal
+              ${
+                activeFilter.type === "tag" && activeFilter.value === tag
+                  ? "bg-primary/90 hover:bg-primary text-primary-foreground"
+                  : "bg-secondary/40 hover:bg-secondary/50"
+              }
+            `}
             onClick={() => handleFilterClick("tag", tag)}
           >
             {tag}
@@ -147,10 +170,12 @@ const TripsDisplay = () => {
         ? tripsData?.tripByType
         : tripsData?.allTrip;
 
+    const filteredTrips = filterTrips(trips);
+
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {trips?.map((trip: any) => (
-          <ItemCard item={trip} />
+        {filteredTrips?.map((trip: any) => (
+          <ItemCard key={trip?.id} item={trip} />
         ))}
       </div>
     );
@@ -159,8 +184,12 @@ const TripsDisplay = () => {
   return (
     <Card className="w-full bg-card/50 backdrop-blur-sm border-none shadow-lg">
       <CardHeader className="space-y-4">
+        <Input
+          placeholder="search places"
+          onChange={(e) => setSearchQuery(e.target.value)}
+          value={searchQuery}
+        />
         <div className="flex items-center justify-between">
-          <CardTitle className="text-2xl font-bold">Available Trips</CardTitle>
           {activeFilter.type && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
@@ -181,6 +210,7 @@ const TripsDisplay = () => {
             </motion.div>
           )}
         </div>
+
         {renderTags()}
       </CardHeader>
       <CardContent>{renderTrips()}</CardContent>

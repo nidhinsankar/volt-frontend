@@ -10,7 +10,6 @@ export default function TripResult() {
   return (
     <div className="container flex flex-col gap-6 my-10 mx-auto py-8 px-4 mt-40">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        cdv
         {data?.result?.all_hotels?.map((hotel: any, index: any) => (
           <ItemCard key={index} item={hotel} />
         ))}

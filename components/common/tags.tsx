@@ -13,7 +13,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AlertCircle, RefreshCcw, X, MapPin, DollarSign } from "lucide-react";
-import TripImage from "@/app/trip-image.jpg";
+import { ItemCard } from "./ui-card";
+import { motion } from "framer-motion";
 
 const TripsDisplay = () => {
   const [activeFilter, setActiveFilter] = useState({ type: null, value: null });
@@ -149,7 +150,48 @@ const TripsDisplay = () => {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {trips?.map((trip: any) => (
-          <Card key={trip.id} className="overflow-hidden">
+          <ItemCard item={trip} />
+        ))}
+      </div>
+    );
+  };
+
+  return (
+    <Card className="w-full bg-card/50 backdrop-blur-sm border-none shadow-lg">
+      <CardHeader className="space-y-4">
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-2xl font-bold">Available Trips</CardTitle>
+          {activeFilter.type && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="flex items-center gap-2 bg-secondary/50 rounded-full px-4 py-1"
+            >
+              <span className="text-sm">
+                {activeFilter.type}: {activeFilter.value}
+              </span>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={clearFilter}
+                className="h-6 w-6 p-0 rounded-full hover:bg-secondary"
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </motion.div>
+          )}
+        </div>
+        {renderTags()}
+      </CardHeader>
+      <CardContent>{renderTrips()}</CardContent>
+    </Card>
+  );
+};
+
+export default TripsDisplay;
+
+{
+  /* <Card key={trip.id} className="overflow-hidden">
             <img
               // src={TripImage.src}
               onError={(e) => {
@@ -192,41 +234,8 @@ const TripsDisplay = () => {
                 ))}
               </div>
             </CardContent>
-          </Card>
-        ))}
-      </div>
-    );
-  };
-
-  return (
-    <Card className="w-full">
-      <CardHeader>
-        <CardTitle>Available Trips</CardTitle>
-        {activeFilter.type && (
-          <div className="flex items-center gap-2">
-            <Badge variant="secondary">
-              {activeFilter.type}: {activeFilter.value}
-            </Badge>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={clearFilter}
-              className="h-6 p-1"
-            >
-              <X className="h-4 w-4" />
-            </Button>
-          </div>
-        )}
-      </CardHeader>
-      <CardContent>
-        {renderTags()}
-        {renderTrips()}
-      </CardContent>
-    </Card>
-  );
-};
-
-export default TripsDisplay;
+          </Card> */
+}
 
 //
 

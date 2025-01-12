@@ -7,7 +7,9 @@ const Header = () => {
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <div className="w-8 h-8 rounded-full bg-violet-600" />
-          <span className="text-xl font-semibold">Logoipsum</span>
+          <span className="text-xl font-semibold">
+            <span className="text-violet-500">GOT</span>rip AI
+          </span>
         </div>
         <div className="flex items-center space-x-4">
           <Button variant="secondary" className="font-medium">

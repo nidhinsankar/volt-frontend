@@ -10,12 +10,11 @@ export interface BaseItem {
 }
 
 export interface TravelData {
-  all_hotels: {
-    stay_hotels: BaseItem[];
-    eatery_hotels: BaseItem[];
+  result: {
+    all_hotels: BaseItem[];
+    all_places: BaseItem[];
+    all_transportation: BaseItem[];
   };
-  all_places: BaseItem[];
-  all_transportation: BaseItem[];
 }
 
 // store/useTravelStore.ts

@@ -39,7 +39,7 @@ const Header = () => {
             )}
             href="/dashboard"
           >
-            My Trips
+            Explore
           </Link>
         </div>
       </div>

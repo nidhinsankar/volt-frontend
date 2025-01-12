@@ -105,29 +105,6 @@ const TripsDisplay = () => {
         }
         onTagClick={(tag) => handleFilterClick("tag", tag)}
       />
-      // <div className="flex flex-wrap gap-2 mb-6">
-      //   {tagsData?.allTags.map((tag: any) => (
-      //     <Badge
-      //       key={tag}
-      //       variant={
-      //         activeFilter.type === "tag" && activeFilter.value === tag
-      //           ? "default"
-      //           : "secondary"
-      //       }
-      //       className={`
-      //         px-3 py-1 cursor-pointer text-sm font-normal
-      //         ${
-      //           activeFilter.type === "tag" && activeFilter.value === tag
-      //             ? "bg-primary/90 hover:bg-primary text-primary-foreground"
-      //             : "bg-secondary/40 hover:bg-secondary/50"
-      //         }
-      //       `}
-      //       onClick={() => handleFilterClick("tag", tag)}
-      //     >
-      //       {tag}
-      //     </Badge>
-      //   ))}
-      // </div>
     );
   };
 
@@ -197,6 +174,21 @@ const TripsDisplay = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
           value={searchQuery}
         />
+        <div className="inline-flex justify-end items-end ">
+          <a
+            href="https://dgraph.io"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="gap-2 w-32 px-3 py-1.5 bg-gray-800/90 rounded-lg text-xs text-gray-400 hover:text-gray-300 transition-colors group hover:bg-gray-800/70"
+          >
+            <span>Search powered by</span>
+            <img
+              src="https://cdn.prod.website-files.com/63fa3e9d303f20f698270a7a/6634fe57b4ce744214616951_DgraphByHypermode_light.svg"
+              alt="Dgraph"
+              className="h-3.5 invert opacity-75 group-hover:opacity-100 transition-opacity"
+            />
+          </a>
+        </div>
         <div className="flex items-center justify-between">
           {activeFilter.type && (
             <motion.div

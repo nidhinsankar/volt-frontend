@@ -13,6 +13,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AlertCircle, RefreshCcw, X, MapPin, DollarSign } from "lucide-react";
+import TripImage from "@/app/trip-image.jpg";
+import Image from "next/image";
 
 const TripsDisplay = () => {
   const [activeFilter, setActiveFilter] = useState({ type: null, value: null });
@@ -42,6 +44,8 @@ const TripsDisplay = () => {
         : undefined,
     }
   );
+
+  console.log("data", tripsData);
 
   const handleFilterClick = (type, value) => {
     if (activeFilter.type === type && activeFilter.value === value) {
@@ -148,6 +152,12 @@ const TripsDisplay = () => {
         {trips?.map((trip) => (
           <Card key={trip.id} className="overflow-hidden">
             <img
+              // src={TripImage.src}
+              onError={(e) => {
+                e.currentTarget.src = TripImage.src;
+              }}
+              width={100}
+              height={100}
               src={trip.image}
               alt={trip.name}
               className="h-48 w-full object-cover"

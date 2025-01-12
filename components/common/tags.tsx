@@ -14,7 +14,6 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { AlertCircle, RefreshCcw, X, MapPin, DollarSign } from "lucide-react";
 import TripImage from "@/app/trip-image.jpg";
-import Image from "next/image";
 
 const TripsDisplay = () => {
   const [activeFilter, setActiveFilter] = useState({ type: null, value: null });
@@ -40,14 +39,14 @@ const TripsDisplay = () => {
       : GET_ALL_TRIPS,
     {
       variables: activeFilter.value
-        ? { [activeFilter.type]: activeFilter.value }
+        ? { [activeFilter.type!]: activeFilter.value }
         : undefined,
     }
   );
 
   console.log("data", tripsData);
 
-  const handleFilterClick = (type, value) => {
+  const handleFilterClick = (type: any, value: any) => {
     if (activeFilter.type === type && activeFilter.value === value) {
       setActiveFilter({ type: null, value: null });
     } else {
@@ -82,7 +81,7 @@ const TripsDisplay = () => {
 
     return (
       <div className="flex flex-wrap gap-2 mb-6">
-        {tagsData?.allTags.map((tag) => (
+        {tagsData?.allTags.map((tag: any) => (
           <Badge
             key={tag}
             variant={
@@ -149,7 +148,7 @@ const TripsDisplay = () => {
 
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {trips?.map((trip) => (
+        {trips?.map((trip: any) => (
           <Card key={trip.id} className="overflow-hidden">
             <img
               // src={TripImage.src}
@@ -186,7 +185,7 @@ const TripsDisplay = () => {
                 {trip.price}
               </div>
               <div className="mt-2 flex flex-wrap gap-1">
-                {trip.tags.map((tag) => (
+                {trip.tags.map((tag: any) => (
                   <Badge key={tag} variant="outline" className="text-xs">
                     {tag}
                   </Badge>

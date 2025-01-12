@@ -1,6 +1,4 @@
 import FilteredTrips from "@/components/common/tags";
-import TripLast from "@/components/common/trip-list";
-import TripCard from "@/components/trip-card";
 import { Button } from "@/components/ui/button";
 
 const DashboardPage = () => {
@@ -27,7 +25,6 @@ const DashboardPage = () => {
       </nav>
       <div className="pt-24">
         <FilteredTrips />
-        {/* <TripLast /> */}
       </div>
     </div>
   );

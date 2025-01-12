@@ -87,7 +87,7 @@ const CreateTripForm = () => {
         // Add the data to database before navigation
         try {
           setIsSubmitting(true);
-          const { results, errors } = await handleAddAllContent();
+          const { results, errors } = await handleAddAllContent(parsedResult);
 
           if (errors.length > 0) {
             console.error("Some items failed to add:", errors);
@@ -175,7 +175,7 @@ const CreateTripForm = () => {
           content: {
             id: `${contentItem?.name}-${contentItem?.price}`,
             name: contentItem.name,
-            price: contentItem.price, // Ensure price is a number
+            price: String(contentItem.price), // Ensure price is a number
             address: contentItem.address,
             image: contentItem.image,
             type: contentItem.type,
@@ -192,7 +192,7 @@ const CreateTripForm = () => {
       throw err;
     }
   };
-  const handleAddAllContent = async () => {
+  const handleAddAllContent = async (tripResult: any) => {
     const results = [];
     const errors = [];
     console.log("handleAddAllContent");

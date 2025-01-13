@@ -22,12 +22,16 @@ import { create } from "zustand";
 
 interface TravelStore {
   travelData: TravelData | null;
+  info: any;
   setTravelData: (data: TravelData) => void;
+  setInfoData: (data: any) => void;
 }
 
 const useTravelStore = create<TravelStore>((set) => ({
   travelData: null,
+  info: null,
   setTravelData: (data) => set({ travelData: data }),
+  setInfoData: (data) => set({ info: data }),
 }));
 
 export default useTravelStore;

@@ -27,7 +27,7 @@ import { useToast } from "@/hooks/use-toast";
 const CreateTripForm = () => {
   const { toast } = useToast();
   const router = useRouter();
-  const { setTravelData } = useTravelStore();
+  const { setTravelData, setInfoData } = useTravelStore();
   const [error, setError] = useState<null | string>("");
   const [tripResult, setTripResult] = useState({});
   const [formData, setFormData] = useState({
@@ -79,6 +79,12 @@ const CreateTripForm = () => {
         const parsedResult = JSON.parse(parseClean(data.generateTripPlan));
         setTripResult(parsedResult);
         setTravelData(parsedResult);
+        setInfoData({
+          location: formData?.location,
+          days: formData?.location,
+          budget: formData?.selectedBudget,
+          people: formData?.selectedCompanions,
+        });
         console.log("data=>", data.generateTripPlan);
         toast({
           title: "Trip Plan",
